@@ -4,7 +4,3 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.c
-
-DISTFILES += \
-    Makefile \
-    run-make.sh
