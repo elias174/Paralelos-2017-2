@@ -15,10 +15,9 @@ int main(int argc, char** argv)
     }
     int i, tmp,phase;
     double start = omp_get_wtime();
-#pragma omp parallel num_threads(thread_count) default(none) shared(a, n) private(i, tmp, phase)
     for(phase=0; phase<n; phase++){
         if(phase%2==0)
-#pragma omp for
+#pragma omp parallel for num_threads(thread_count) default(none) shared(a,n) private(i,tmp)
             for(i=1; i<n; i+=2){
                 if(a[i-1] > a[i]){
                     tmp = a[i-1];
@@ -27,7 +26,7 @@ int main(int argc, char** argv)
                 }
             }
         else
-#pragma omp for
+#pragma omp parallel for num_threads(thread_count) default(none) shared(a,n) private(i,tmp)
             for(i=1;i<n-1;i+=2){
                 if(a[i] > a[i+1]){
                     tmp = a[i+1];
@@ -36,12 +35,10 @@ int main(int argc, char** argv)
                 }
             }
     }
-
     for(int b=0; b<n; b++){
         printf("%d ", a[b]);
     }
     printf("\n");
     printf("Time: \t %f \n", omp_get_wtime()-start);
-
     return 0;
 }
