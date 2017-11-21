@@ -16,8 +16,8 @@ using namespace std;
 __global__
 void matMultKernel_tile_seven(int *d_M, int *d_N, int *d_P, int Width){
 
-    extern __shared__ int Mds[TILE_WIDTH][TILE_WIDTH];
-    extern __shared__ int Nds[TILE_WIDTH][TILE_WIDTH];
+    extern __shared__ int Mds[];
+    extern __shared__ int Nds[];
 
     int bx = blockIdx.x; int by = blockIdx.y;
     int tx = threadIdx.x; int ty = threadIdx.y;
